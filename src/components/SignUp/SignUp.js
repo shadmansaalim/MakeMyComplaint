@@ -26,7 +26,7 @@ const SignUp = ({ setModalShow, setSignUp }) => {
             swal("Passwords doesn't match!", "Please check password and then try again", "error");
         }
         else {
-            setModalShow(false)
+            setModalShow(false);
             registerUser(signUpData.name, signUpData.email, signUpData.password, history);
             e.target.reset();
         }

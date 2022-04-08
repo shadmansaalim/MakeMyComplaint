@@ -1,7 +1,8 @@
 import initializeAuthentication from "../Firebase/firebase.init";
-import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, getIdToken } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, getIdToken, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState } from "react";
 import { useEffect } from "react";
+import swal from 'sweetalert';
 
 initializeAuthentication();
 
@@ -9,6 +10,7 @@ initializeAuthentication();
 const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const googleProvider = new GoogleAuthProvider();
 
     const auth = getAuth();
 
@@ -53,11 +55,60 @@ const useFirebase = () => {
         });
     }, [auth])
 
+    const signInWithGoogle = (location, history) => {
+        setIsLoading(true);
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+
+            }).catch((error) => {
+
+            })
+            .finally(() => setIsLoading(false));
+    }
+
+
+    const loginUser = (email, password, location, history) => {
+        setIsLoading(true);
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                //Using location to redirect the user to his/her desired destination if the user was redirected to login page by the system. Doing this to improve the UX of the user.
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+
+            })
+            .catch((error) => {
+                if (error.message === "Firebase: Error (auth/wrong-password).") {
+                    swal("Invalid Password!", "Please check your email & password and then try again", "error");
+                }
+                else if (error.message === "Firebase: Error (auth/user-not-found).") {
+                    swal("User Not Found!", "Please check your email & password and then try again", "warning");
+                }
+            })
+            .finally(() => setIsLoading(false));
+    }
+
+    const logOut = () => {
+        setIsLoading(true)
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            setUser({});
+        }).catch((error) => {
+            // An error happened.
+        })
+            .finally(() => setIsLoading(false));
+    }
+
 
     return {
         user,
         isLoading,
         registerUser,
+        loginUser,
+        signInWithGoogle,
+        logOut
     }
 };
 

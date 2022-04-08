@@ -8,12 +8,13 @@ import { useState } from 'react';
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import useModalData from '../../hooks/useModalData';
+import useAuth from '../../hooks/useAuth';
 
 
 
 const Header = () => {
     const { modalShow, setModalShow, signUp, setSignUp } = useModalData();
-
+    const { user } = useAuth();
 
     return (
         // Website Top Navigation Bar
@@ -50,11 +51,19 @@ const Header = () => {
                                 color: "black"
                             }}>Contact</NavLink>
                     </Nav>
-                    <Nav className="ms-auto d-flex align-items-center mt-1 mt-lg-0">
-                        <Button className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
-                        </Button>
-                        <Button onClick={() => setModalShow(true)} className="mt-2 mt-lg-0" variant="dark">Login <FontAwesomeIcon icon={faSignInAlt} /></Button>
-                    </Nav>
+                    {
+                        user?.email
+                            ?
+                            <Nav className="ms-auto d-flex align-items-center">
+                                <Button className="mt-2 mt-lg-0 rounded-pill" variant="success">Dashboard <FontAwesomeIcon icon={faSignInAlt} /></Button>
+                            </Nav>
+                            :
+                            <Nav className="ms-auto d-flex align-items-center mt-1 mt-lg-0">
+                                <Button className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
+                                </Button>
+                                <Button onClick={() => setModalShow(true)} className="mt-2 mt-lg-0" variant="dark">Login <FontAwesomeIcon icon={faSignInAlt} /></Button>
+                            </Nav>
+                    }
 
                     <Modal
                         show={modalShow}

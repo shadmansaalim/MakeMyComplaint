@@ -2,8 +2,35 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faStore } from '@fortawesome/free-solid-svg-icons';
+import useAuth from '../../hooks/useAuth';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 const Login = ({ setModalShow, setSignUp }) => {
+    const { loginUser, signInWithGoogle } = useAuth();
+
+    const location = useLocation();
+    const history = useHistory();
+
+    const [loginData, setLoginData] = useState({});
+    const [signInEmail, setSignInEmail] = useState(false);
+
+    const handleOnBlur = e => {
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = { ...loginData };
+        newLoginData[field] = value;
+        setLoginData(newLoginData);
+    }
+
+
+    const handleLoginSubmit = e => {
+        setModalShow(false);
+        loginUser(loginData.email, loginData.password, location, history);
+        e.preventDefault();
+    }
+
+
     return (
         <section>
             <span aria-hidden="true"
@@ -19,14 +46,19 @@ const Login = ({ setModalShow, setSignUp }) => {
             >&times;</span>
             <div className="container">
                 <div className="offset-xl-1  p-5 rounded-3 mx-auto">
-                    <form>
+                    <form onSubmit={handleLoginSubmit}>
                         <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                             <p className="lead fw-normal mb-0 me-3">Sign in with</p>
                             <button type="button" className="btn btn-outline-success rounded-circle mx-1">
                                 <i className="fab fa-facebook-f"></i>
                             </button>
 
-                            <button type="button" className="btn btn-outline-success rounded-circle mx-1">
+                            <button
+                                onClick={() => {
+                                    setModalShow(false);
+                                    signInWithGoogle(location, history);
+                                }}
+                                type="button" className="btn btn-outline-success rounded-circle mx-1">
                                 <i className="fab fa-google"></i>
                             </button>
 
@@ -43,12 +75,14 @@ const Login = ({ setModalShow, setSignUp }) => {
 
                         <div className="form-floating mb-3">
                             <input
+                                onBlur={handleOnBlur}
                                 name="email"
                                 type="email" className="form-control" id="floatingLoginEmail" placeholder="name@example.com" />
                             <label htmlFor="floatingLoginEmail">Email address</label>
                         </div>
                         <div className="form-floating mb-4">
                             <input
+                                onBlur={handleOnBlur}
                                 name="password"
                                 type="password" className="form-control" id="floatingLoginPassword" placeholder="Password" />
                             <label htmlFor="floatingLoginPassword">Password</label>
