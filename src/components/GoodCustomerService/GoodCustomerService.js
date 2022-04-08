@@ -5,7 +5,7 @@ const GoodCustomerService = () => {
     return (
         <div className="mb-5">
             <h4 className="fw-bold mb-4">Popular Stores For Good Customer Service</h4>
-            <div className="col-md-10 mx-auto row row-cols-1 row-cols-md-3 g-4">
+            <div className="col-md-10 mx-auto row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <div className="col">
                     <div className="card h-100 rounded-3">
                         <img src="https://img.taste.com.au/wYwIaYV7/taste/2020/05/coles-162248-2.jpg" className="card-img-top" alt="..." />
