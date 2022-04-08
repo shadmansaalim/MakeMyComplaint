@@ -7,12 +7,12 @@ import { faSignInAlt, faStore } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
+import useModalData from '../../hooks/useModalData';
 
 
 
 const Header = () => {
-    const [modalShow, setModalShow] = useState(false);
-    const [signUp, setSignUp] = useState(false);
+    const { modalShow, setModalShow, signUp, setSignUp } = useModalData();
 
 
     return (
@@ -61,9 +61,6 @@ const Header = () => {
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
-                        style={{
-                            zIndex: 100000000000000
-                        }}
                     >
 
                         <Modal.Body>

@@ -32,9 +32,6 @@ const Banner = () => {
                             textShadow: "1px 1px black"
                         }}>The #1 Site For Sharing Your Buying Experience</h2>
                         <Typeahead
-                            style={{
-                                zIndex: 1000000000000
-                            }}
                             id="basic-typeahead-single"
                             labelKey="name"
                             onChange={setSingleSelections}

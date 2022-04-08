@@ -7,7 +7,7 @@ initializeAuthentication();
 
 
 const useFirebase = () => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
     const auth = getAuth();
@@ -48,7 +48,7 @@ const useFirebase = () => {
                 })
 
             setIsLoading(false);
-
+            console.log(user);
 
         });
     }, [auth])
