@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import './SignUp.css';
 
 const SignUp = ({ setModalShow, setSignUp }) => {
     const [signUpData, setSignUpData] = useState({});
@@ -45,7 +46,10 @@ const SignUp = ({ setModalShow, setSignUp }) => {
                     color: 'black',
                     cursor: 'pointer'
                 }}
-                onClick={() => setModalShow(false)}
+                onClick={() => {
+                    setModalShow(false);
+                    setSignUp(false);
+                }}
             >&times;</span>
             <div className="container">
                 <div className="offset-xl-1  p-5 rounded-3 mx-auto">
