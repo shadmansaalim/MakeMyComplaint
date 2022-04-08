@@ -5,21 +5,16 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faStore } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import useAuth from '../../hooks/useAuth';
-// import { useState } from 'react';
-// import './Header.css'
-// import Cart from '../Cart/Cart';
-// import useCartContext from '../../hooks/useCartContext';
-// import { useEffect } from 'react';
-// import { cartItemCount, deleteFromDb } from '../../utilities/LocalStorage';
-// import logo from '../../images/logo-udemy.svg';
+import useAuth from '../../hooks/useAuth';
+
 
 
 
 const Header = () => {
     const [modalShow, setModalShow] = useState(false);
     const [signUp, setSignUp] = useState(false);
+
+
     return (
         // Website Top Navigation Bar
         <Navbar className="shadow-lg pt-lg-3" expand="lg">

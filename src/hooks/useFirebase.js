@@ -51,7 +51,7 @@ const useFirebase = () => {
 
 
         });
-    }, [auth, user.email])
+    }, [auth])
 
 
     return {
