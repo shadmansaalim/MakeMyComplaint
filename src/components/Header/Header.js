@@ -10,7 +10,7 @@ const Header = () => {
         // Website Top Navigation Bar
         <Navbar className="shadow-lg pt-lg-3" expand="lg">
             <Container>
-                <Navbar.Brand className="fw-bold pe-1" href="/home">
+                <Navbar.Brand className="fw-bold pe-1" href="/">
                     MakeMy<span className="text-success">Complaint</span>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
