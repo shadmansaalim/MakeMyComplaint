@@ -32,7 +32,7 @@ const Header = () => {
                                 fontWeight: "bold",
                                 color: "black"
                             }}>Home</NavLink>
-                        <NavLink className="text-decoration-none me-lg-3" exact to="/courses"
+                        <NavLink className="text-decoration-none me-lg-3" exact to="/stores"
                             style={{ color: '#161c2d' }}
                             activeStyle={{
                                 fontWeight: "bold",
@@ -44,7 +44,7 @@ const Header = () => {
                                 fontWeight: "bold",
                                 color: "black"
                             }}>About</NavLink>
-                        <NavLink className="text-decoration-none me-lg-3" exact to="/developer"
+                        <NavLink className="text-decoration-none me-lg-3" exact to="/contact"
                             style={{ color: '#161c2d' }}
                             activeStyle={{
                                 fontWeight: "bold",
