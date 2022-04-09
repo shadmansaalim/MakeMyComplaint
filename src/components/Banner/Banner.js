@@ -8,20 +8,21 @@ import { Form } from 'react-bootstrap';
 import {
     Typeahead,
 } from 'react-bootstrap-typeahead';
+import { useEffect } from 'react';
 
 
 const Banner = () => {
     const [singleSelections, setSingleSelections] = useState([]);
+    const [stores, setStores] = useState([]);
 
-    const options = ["Coles, Melbourne Central",
-        "Woolworth, QV Market",
-        "Seven Eleven, Swanston Street",
-        "Big W, QV Market",
-        "Coles, Melbourne Central",
-        "Woolworth, QV Market",
-        "Seven Eleven, Swanston Street",
-        "Big W, QV Market",
-    ];
+    useEffect(() => {
+        fetch('http://localhost:5000/stores')
+            .then(res => res.json())
+            .then(data => setStores(data));
+    }, [])
+
+    const options = [];
+    stores.forEach(store => options.push(store.name + ", " + store.location));
 
     return (
         <div className="mb-5">

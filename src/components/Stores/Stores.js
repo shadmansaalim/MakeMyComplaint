@@ -79,7 +79,7 @@ const Stores = () => {
     useEffect(() => {
         fetch('http://localhost:5000/stores')
             .then(res => res.json())
-            .then(data => setStores([]))
+            .then(data => setStores(data))
     }, [stores])
     return (
         <>
@@ -87,7 +87,6 @@ const Stores = () => {
                 stores.length
                     ?
                     <div className="my-5">
-                        <h4 className="fw-bold mb-4">Popular Stores For Good Customer Service</h4>
                         <div className="col-md-10 mx-auto row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                             {
                                 stores.map(store => store.status === 'approved' &&
