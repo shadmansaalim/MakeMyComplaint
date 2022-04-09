@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { Navbar, Container, Nav, Button, Modal } from 'react-bootstrap';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faStore } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
@@ -9,7 +9,8 @@ import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login';
 import useModalData from '../../hooks/useModalData';
 import useAuth from '../../hooks/useAuth';
-
+import swal from 'sweetalert';
+import { useEffect } from 'react';
 
 
 const Header = () => {
@@ -17,12 +18,23 @@ const Header = () => {
     const { user } = useAuth();
 
     const history = useHistory();
+    const location = useLocation();
+
+    //Showing a message if user tries to REGISTER STORE without authenticating him/her. 
+    //Using the modal count to avoid showing modal multiple times on refresh/reload
+    useEffect(() => {
+        for (let i = 0; i < location.modalCount; i++) {
+            if (!user.email && (location?.state?.from?.pathname) === '/register-store') {
+                swal("Login / Sign Up", "Please login to register your store", "warning");
+            }
+        }
+    }, [location])
 
     return (
         // Website Top Navigation Bar
         <Navbar className="shadow-lg pt-lg-3" expand="lg">
             <Container>
-                <Navbar.Brand className="fw-bold pe-1" href="/home">
+                <Navbar.Brand className="fw-bold pe-1" href="/">
                     MakeMy<span className="text-success">Complaint</span>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -57,7 +69,9 @@ const Header = () => {
                         user?.email
                             ?
                             <Nav className="ms-auto d-flex align-items-center ">
-                                <Button onClick={() => history.push('/register-store')} className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
+                                <Button onClick={() => {
+                                    history.push('/register-store')
+                                }} className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
                                 </Button>
                                 <Button className="mt-2 mt-lg-0 rounded-pill" variant="dark">Dashboard <FontAwesomeIcon icon={faSignInAlt} /></Button>
                             </Nav>

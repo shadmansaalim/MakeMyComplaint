@@ -44,12 +44,14 @@ const useFirebase = () => {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             setIsLoading(true);
-            setUser(user);
-            getIdToken(user)
-                .then(token => {
-                    localStorage.setItem('token', token)
+            if (user) {
+                setUser(user);
+                getIdToken(user)
+                    .then(token => {
+                        localStorage.setItem('token', token)
 
-                })
+                    })
+            }
 
             setIsLoading(false);
             console.log(user);

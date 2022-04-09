@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer';
 import ContextProvider from './context/ContextProvider';
 import Stores from './components/Stores/Stores';
 import RegisterStore from './components/RegisterStore/RegisterStore';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -28,9 +29,9 @@ function App() {
             <Route exact path="/stores">
               <Stores></Stores>
             </Route>
-            <Route exact path="/register-store">
+            <PrivateRoute exact path="/register-store">
               <RegisterStore></RegisterStore>
-            </Route>
+            </PrivateRoute>
           </Switch>
           <Footer></Footer>
         </Router>
