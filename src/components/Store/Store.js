@@ -1,10 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Store = ({ store }) => {
-    const { name, image, location, reviews } = store;
+    const { _id, name, image, location, reviews } = store;
+    const history = useHistory();
     return (
         <div className="col">
-            <div className="card h-100 rounded-3">
+            <div className="card h-100 rounded-3" onClick={() => {
+                history.push(`/store/${_id}`)
+            }}>
                 <img src={image} className="card-img-top" alt="..." />
                 <div className="card-body pb-2">
                     <h5 className="card-title text-start fw-bold mb-1">{name}</h5>

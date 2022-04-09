@@ -12,6 +12,7 @@ import ContextProvider from './context/ContextProvider';
 import Stores from './components/Stores/Stores';
 import RegisterStore from './components/RegisterStore/RegisterStore';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import StoreDetails from './components/StoreDetails/StoreDetails';
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
             <Route exact path="/stores">
               <Header></Header>
               <Stores></Stores>
+              <Footer></Footer>
+            </Route>
+            <Route exact path="/store/:id">
+              <Header></Header>
+              <StoreDetails></StoreDetails>
               <Footer></Footer>
             </Route>
             <PrivateRoute exact path="/register-store">

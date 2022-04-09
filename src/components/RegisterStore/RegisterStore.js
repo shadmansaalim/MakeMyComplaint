@@ -38,7 +38,7 @@ const RegisterStore = () => {
 
     return (
         <div className="mb-5">
-            <div className="bg-img d-flex justify-content-center align-items-center" >
+            <div className="register-store-bg d-flex justify-content-center align-items-center" >
             </div>
             <section className="mb-5" style={{
                 marginTop: '-80px'
