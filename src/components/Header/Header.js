@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { Navbar, Container, Nav, Button, Modal } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faStore } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
@@ -15,6 +15,8 @@ import useAuth from '../../hooks/useAuth';
 const Header = () => {
     const { modalShow, setModalShow, signUp, setSignUp } = useModalData();
     const { user } = useAuth();
+
+    const history = useHistory();
 
     return (
         // Website Top Navigation Bar
@@ -54,12 +56,14 @@ const Header = () => {
                     {
                         user?.email
                             ?
-                            <Nav className="ms-auto d-flex align-items-center">
+                            <Nav className="ms-auto d-flex align-items-center ">
+                                <Button onClick={() => history.push('/register-store')} className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
+                                </Button>
                                 <Button className="mt-2 mt-lg-0 rounded-pill" variant="success">Dashboard <FontAwesomeIcon icon={faSignInAlt} /></Button>
                             </Nav>
                             :
                             <Nav className="ms-auto d-flex align-items-center mt-1 mt-lg-0">
-                                <Button className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
+                                <Button onClick={() => history.push('/register-store')} className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
                                 </Button>
                                 <Button onClick={() => setModalShow(true)} className="mt-2 mt-lg-0" variant="dark">Login <FontAwesomeIcon icon={faSignInAlt} /></Button>
                             </Nav>
