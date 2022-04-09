@@ -68,7 +68,7 @@ const Header = () => {
                     {
                         user?.email
                             ?
-                            <Nav className="ms-auto d-flex align-items-center ">
+                            <Nav className="ms-auto d-flex align-items-center mt-1 mt-lg-0">
                                 <Button onClick={() => {
                                     history.push('/register-store')
                                 }} className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
