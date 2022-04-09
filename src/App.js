@@ -18,7 +18,6 @@ function App() {
     <div className="App">
       <ContextProvider>
         <Router>
-          <Header></Header>
           <Switch>
             <Route exact path="/home">
               <Home></Home>
@@ -27,13 +26,16 @@ function App() {
               <Home></Home>
             </Route>
             <Route exact path="/stores">
+              <Header></Header>
               <Stores></Stores>
+              <Footer></Footer>
             </Route>
             <PrivateRoute exact path="/register-store">
+              <Header></Header>
               <RegisterStore></RegisterStore>
+              <Footer></Footer>
             </PrivateRoute>
           </Switch>
-          <Footer></Footer>
         </Router>
       </ContextProvider>
     </div>

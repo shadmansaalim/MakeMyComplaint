@@ -79,21 +79,33 @@ const Stores = () => {
     useEffect(() => {
         fetch('http://localhost:5000/stores')
             .then(res => res.json())
-            .then(data => setStores(data))
+            .then(data => setStores([]))
     }, [stores])
     return (
-        <div className="my-5">
-            <h4 className="fw-bold mb-4">Popular Stores For Good Customer Service</h4>
-            <div className="col-md-10 mx-auto row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {
-                    stores.map(store => store.status === 'approved' &&
-                        <Store
-                            key={store._id}
-                            store={store}
-                        ></Store>)
-                }
-            </div>
-        </div>
+        <>
+            {
+                stores.length
+                    ?
+                    <div className="my-5">
+                        <h4 className="fw-bold mb-4">Popular Stores For Good Customer Service</h4>
+                        <div className="col-md-10 mx-auto row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            {
+                                stores.map(store => store.status === 'approved' &&
+                                    <Store
+                                        key={store._id}
+                                        store={store}
+                                    ></Store>)
+                            }
+                        </div>
+                    </div>
+                    :
+                    <div class="spinner d-flex align-items-center justify-content-center">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+            }
+        </>
     );
 };
 
