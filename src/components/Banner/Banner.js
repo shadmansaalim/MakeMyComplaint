@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import banner from '../../images/banner.jpg';
 import './Banner.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css'
@@ -8,18 +7,10 @@ import { Form } from 'react-bootstrap';
 import {
     Typeahead,
 } from 'react-bootstrap-typeahead';
-import { useEffect } from 'react';
 
 
-const Banner = () => {
+const Banner = ({ stores }) => {
     const [singleSelections, setSingleSelections] = useState([]);
-    const [stores, setStores] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:5000/stores')
-            .then(res => res.json())
-            .then(data => setStores(data));
-    }, [])
 
     const options = [];
     stores.forEach(store => options.push(store.name + ", " + store.location));
