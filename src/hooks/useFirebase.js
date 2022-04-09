@@ -21,6 +21,8 @@ const useFirebase = () => {
                 const newUser = { email, displayName: name };
                 setUser(newUser);
 
+                //Add user to db
+                saveUserToDb(email, name, 'POST');
 
                 // Send name to firebase
                 updateProfile(auth.currentUser, {
@@ -59,6 +61,9 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
+                const user = result.user;
+                //Add user to db
+                saveUserToDb(user.email, user.displayName, 'PUT');
 
                 const destination = location?.state?.from || '/';
                 history.replace(destination);
@@ -99,6 +104,19 @@ const useFirebase = () => {
             // An error happened.
         })
             .finally(() => setIsLoading(false));
+    }
+
+    //Function to add users to database
+    const saveUserToDb = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
     }
 
 
