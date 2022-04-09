@@ -9,19 +9,19 @@
 }
 
 
-.order-form .container {
+.register-form .container {
     color: #4c4c4c;
     padding: 20px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
   }
 
-  .order-form-label {
+  .register-form-label {
     margin: 8px 0 0 0;
     font-size: 14px;
     font-weight: bold;
   }
 
-  .order-form-input {
+  .register-form-input {
     width: 100%;
     padding: 8px 8px;
     border-width: 1px !important;
