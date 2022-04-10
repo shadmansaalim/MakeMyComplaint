@@ -14,38 +14,41 @@ import RegisterStore from './components/RegisterStore/RegisterStore';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import StoreDetails from './components/StoreDetails/StoreDetails';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
+import ScrollToTop from './ScrollToTop/ScrollToTop';
 
 function App() {
   return (
     <div className="App">
       <ContextProvider>
         <Router>
-          <Switch>
-            <Route exact path="/home">
-              <Home></Home>
-            </Route>
-            <Route exact path="/">
-              <Home></Home>
-            </Route>
-            <Route exact path="/stores">
-              <Header></Header>
-              <Stores></Stores>
-              <Footer></Footer>
-            </Route>
-            <Route exact path="/store/:id">
-              <Header></Header>
-              <StoreDetails></StoreDetails>
-              <Footer></Footer>
-            </Route>
-            <PrivateRoute exact path="/register-store">
-              <Header></Header>
-              <RegisterStore></RegisterStore>
-              <Footer></Footer>
-            </PrivateRoute>
-            <PrivateRoute path="/dashboard">
-              <Dashboard></Dashboard>
-            </PrivateRoute>
-          </Switch>
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/home">
+                <Home></Home>
+              </Route>
+              <Route exact path="/">
+                <Home></Home>
+              </Route>
+              <Route exact path="/stores">
+                <Header></Header>
+                <Stores></Stores>
+                <Footer></Footer>
+              </Route>
+              <Route exact path="/store/:id">
+                <Header></Header>
+                <StoreDetails></StoreDetails>
+                <Footer></Footer>
+              </Route>
+              <PrivateRoute exact path="/register-store">
+                <Header></Header>
+                <RegisterStore></RegisterStore>
+                <Footer></Footer>
+              </PrivateRoute>
+              <PrivateRoute path="/dashboard">
+                <Dashboard></Dashboard>
+              </PrivateRoute>
+            </Switch>
+          </ScrollToTop>
         </Router>
       </ContextProvider>
     </div>

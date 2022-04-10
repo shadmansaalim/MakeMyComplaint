@@ -18,7 +18,7 @@ import './Dashboard.css';
 
 
 const Dashboard = () => {
-    const [toggled, setToggled] = useState(true);
+    const [toggled, setToggled] = useState(false);
     let { path, url } = useRouteMatch();
     const history = useHistory();
     const { user, logOut, admin } = useAuth();

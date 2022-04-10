@@ -73,7 +73,7 @@ const Header = () => {
                                     history.push('/register-store')
                                 }} className="me-lg-3" variant="outline-success">Register your store <FontAwesomeIcon icon={faStore} />
                                 </Button>
-                                <Button className="mt-2 mt-lg-0 rounded-pill" variant="dark">Dashboard <FontAwesomeIcon icon={faSignInAlt} /></Button>
+                                <Button onClick={() => history.push('/dashboard')} className="mt-2 mt-lg-0 rounded-pill" variant="dark">Dashboard <FontAwesomeIcon icon={faSignInAlt} /></Button>
                             </Nav>
                             :
                             <Nav className="ms-auto d-flex align-items-center mt-1 mt-lg-0">
