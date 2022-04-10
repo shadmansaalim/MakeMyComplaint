@@ -10,6 +10,7 @@ initializeAuthentication();
 const useFirebase = () => {
     const [user, setUser] = useState({})
     const [admin, setAdmin] = useState(false);
+    const [manager, setManager] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
 
@@ -58,6 +59,9 @@ const useFirebase = () => {
                     .then(data => {
                         if (data.admin) {
                             setAdmin(true);
+                        }
+                        if (data.manager) {
+                            setManager(true);
                         }
                         setIsLoading(false);
                     })
@@ -142,6 +146,7 @@ const useFirebase = () => {
     return {
         user,
         admin,
+        manager,
         isLoading,
         registerUser,
         loginUser,

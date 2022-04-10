@@ -21,7 +21,7 @@ const Dashboard = () => {
     const [toggled, setToggled] = useState(false);
     let { path, url } = useRouteMatch();
     const history = useHistory();
-    const { user, logOut, admin } = useAuth();
+    const { user, logOut, admin, manager } = useAuth();
     const [offCanvasShow, setOffCanvasShow] = useState(false);
     const handleOffCanvasClose = () => setOffCanvasShow(false);
     const handleOffCanvasShow = () => setOffCanvasShow(true);
@@ -55,7 +55,7 @@ const Dashboard = () => {
                     ?
                     <div className={toggled ? "d-flex toggled" : "d-flex"} id="wrapper">
 
-                        <div className="bg-dark" id="sidebar-wrapper-dashboard">
+                        <div className="bg-dark" id="sidebar-wrapper">
                             <div className="text-center pt-4 pb-2 border-bottom">
                                 {
                                     user.photoURL ?
@@ -98,11 +98,19 @@ const Dashboard = () => {
 
                                         </>
                                         :
-                                        <>
-                                            <Link to={`${url}/my-complaints`}>
-                                                <Button className="btn btn-success col-10 mb-3" ><FontAwesomeIcon icon={faBorderAll} /> My Complaints</Button>
-                                            </Link>
-                                        </>
+                                        manager
+                                            ?
+                                            <>
+                                                <Link to={`${url}/customer-complaints`}>
+                                                    <Button className="btn btn-success col-10 mb-3" ><FontAwesomeIcon icon={faBorderAll} /> Customer Complaints</Button>
+                                                </Link>
+                                            </>
+                                            :
+                                            <>
+                                                <Link to={`${url}/my-complaints`}>
+                                                    <Button className="btn btn-success col-10 mb-3" ><FontAwesomeIcon icon={faBorderAll} /> My Complaints</Button>
+                                                </Link>
+                                            </>
                                 }
                                 <button onClick={() => {
                                     logOut();
