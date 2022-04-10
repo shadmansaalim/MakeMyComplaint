@@ -22,7 +22,7 @@ const StoreDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/store/${id}`)
+        fetch(`https://pure-bastion-05518.herokuapp.com/store/${id}`)
             .then(res => res.json())
             .then(data => setStore(data));
     }, [])
@@ -46,7 +46,7 @@ const StoreDetails = () => {
         data.customerName = user.displayName;
         data.customerEmail = user.email;
 
-        fetch('http://localhost:5000/complaint', {
+        fetch('https://pure-bastion-05518.herokuapp.com/complaint', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

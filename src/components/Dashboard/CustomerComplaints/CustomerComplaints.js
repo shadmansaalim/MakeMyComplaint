@@ -8,7 +8,7 @@ const CustomerComplaints = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/complaints/${user.email}`)
+        fetch(`https://pure-bastion-05518.herokuapp.com/complaints/${user.email}`)
             .then(res => res.json())
             .then(data => console.log(data));
     }, [])

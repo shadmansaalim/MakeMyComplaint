@@ -15,7 +15,7 @@ const RegisterStore = () => {
         data.status = "pending";
         data.reviews = 0;
 
-        fetch('http://localhost:5000/register-store', {
+        fetch('https://pure-bastion-05518.herokuapp.com/register-store', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

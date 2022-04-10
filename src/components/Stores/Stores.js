@@ -195,7 +195,7 @@ const Stores = () => {
     const [stores, setStores] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/stores')
+        fetch('https://pure-bastion-05518.herokuapp.com/stores')
             .then(res => res.json())
             .then(data => setStores(data))
     }, [stores])

@@ -54,7 +54,7 @@ const useFirebase = () => {
                         localStorage.setItem('token', token)
 
                     })
-                fetch(`http://localhost:5000/users/${user.email}`)
+                fetch(`https://pure-bastion-05518.herokuapp.com/users/${user.email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.admin) {
@@ -133,7 +133,7 @@ const useFirebase = () => {
     //Function to add users to database MONGO DB
     const saveUserToDb = (email, displayName, method) => {
         const user = { email, displayName };
-        fetch('http://localhost:5000/users', {
+        fetch('https://pure-bastion-05518.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
