@@ -15,6 +15,7 @@ import { faPlus, faUserPlus, faHome, faUserCircle, faSignOutAlt, faBorderAll, fa
 import { useEffect } from 'react';
 import swal from 'sweetalert';
 import './Dashboard.css';
+import CustomerComplaints from '../CustomerComplaints/CustomerComplaints';
 
 
 const Dashboard = () => {
@@ -145,6 +146,9 @@ const Dashboard = () => {
                                                 :
                                                 <h3 className="text-start mt-4">Hello, {user.displayName}</h3>
                                         }
+                                    </Route>
+                                    <Route path={`${path}/customer-complaints`}>
+                                        <CustomerComplaints></CustomerComplaints>
                                     </Route>
                                 </Switch>
                             </div>

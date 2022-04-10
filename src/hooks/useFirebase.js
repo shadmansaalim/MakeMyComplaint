@@ -67,6 +67,7 @@ const useFirebase = () => {
                     })
             } else {
                 setAdmin(false);
+                setManager(false);
                 setUser({})
                 setIsLoading(false);
             }
@@ -120,6 +121,7 @@ const useFirebase = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
             setAdmin(false)
+            setManager(false);
             setUser({});
         }).catch((error) => {
             // An error happened.
