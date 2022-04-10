@@ -1,32 +1,15 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './StoreDetails.css';
-
-/*
-Coles - https://cooperoxley.com.au/wp-content/uploads/2016/10/co_gatewaycoles_009.jpg
-Seven Eleven - https://www.c-store.com.au/wp-content/uploads/2022/02/Wodonga.jpg
-Cha Time - https://www.melbournecentral.com.au/Upload/MelbourneCentral/Media/Store-Hero/200210_Chatime_Melbourne_central_centre_assets_banner_image_1338x714px.jpg?ext=.jpg
-Dior - https://www.melbournecentral.com.au/Upload/MelbourneCentral/Media/Store-Hero/no-category.jpg
-JB Hifi - https://www.melbournecentral.com.au/Upload/MelbourneCentral/Media/Store-Hero/ElectronicsMusic.jpg
-KFC - https://www.melbournecentral.com.au/Upload/MelbourneCentral/Media/Store-Hero/Dining-Entertainment.jpg
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faScaleBalanced, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons';
+import { Container } from 'react-bootstrap';
+import Description from '../Description/Description';
 
 
-https://i.ibb.co/4JRSM78/coles.png
 
-https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/7-eleven_logo.svg/2110px-7-eleven_logo.svg.png
-
-https://marketsquaregeelong.com.au/wp-content/uploads/2021/08/Logo.png
-
-https://www.dior.com/couture/var/dior/storage/images/horizon/logo-dior/25334685-1-fre-FR/logo-dior_mobile_share.jpg
-
-https://media.pagefly.io/file/get/jbhifilogobannerjpg-1537244611298.jpg
-
-https://image.similarpng.com/very-thumbnail/2020/06/kfc-logo-free-download-PNG.png
-
-
-*/
 
 const StoreDetails = () => {
     const { id } = useParams();
@@ -46,18 +29,41 @@ const StoreDetails = () => {
     }
 
     return (
-        <div className="mb-5 text-start">
-            <div style={bgStyle}></div>
-            <img src={store.logo} alt=""
-                className="ms-5 rounded-3 shadow"
-                width="130"
-                height="130"
-                style={{
-                    marginTop: '-50px'
-                }}
-            />
+        <>
+            {
+                store.name && store.cover && store.logo
+                    ?
+                    <div className="mb-5 text-start">
+                        <div style={bgStyle}></div>
+                        <img src={store.logo} alt=""
+                            className="ms-5 rounded-3 shadow"
+                            width="130"
+                            height="130"
+                            style={{
+                                marginTop: '-50px'
+                            }}
+                        />
+                        <div className="my-3 d-flex justify-content-center align-items-center">
+                            <button className="btn btn-lg btn-dark ms-3 me-3">Make a complaint <FontAwesomeIcon icon={faScaleBalanced} /></button>
+                            <a target="_blank" href={store.website} className="btn btn-lg btn-success">Visit Store <FontAwesomeIcon icon={faArrowTrendUp} /></a>
+                        </div>
+                        <Container className="my-5 col-11 col-md-9 col-lg-6 store-info mx-auto">
+                            {
+                                store?.description?.map(info => <Description
+                                    info={info}
+                                ></Description>)
+                            }
 
-        </div >
+                        </Container>
+                    </div >
+                    :
+                    <div class="spinner d-flex align-items-center justify-content-center">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+            }
+        </>
     );
 };
 

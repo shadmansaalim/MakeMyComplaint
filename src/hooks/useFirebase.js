@@ -1,5 +1,5 @@
 import initializeAuthentication from "../Firebase/firebase.init";
-import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, getIdToken, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, signInWithEmailAndPassword, onAuthStateChanged, signOut, TwitterAuthProvider, getIdToken } from "firebase/auth";
 import { useState } from "react";
 import { useEffect } from "react";
 import swal from 'sweetalert';
@@ -8,7 +8,8 @@ initializeAuthentication();
 
 
 const useFirebase = () => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({})
+    const [admin, setAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
 
@@ -23,6 +24,7 @@ const useFirebase = () => {
 
                 //Add user to db
                 saveUserToDb(email, name, 'POST');
+
 
                 // Send name to firebase
                 updateProfile(auth.currentUser, {
@@ -51,13 +53,26 @@ const useFirebase = () => {
                         localStorage.setItem('token', token)
 
                     })
+                fetch(`http://localhost:5000/users/${user.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.admin) {
+                            setAdmin(true);
+                        }
+                        setIsLoading(false);
+                    })
+            } else {
+                setAdmin(false);
+                setUser({})
+                setIsLoading(false);
             }
 
-            setIsLoading(false);
-            console.log(user);
-
         });
-    }, [auth])
+    }, [auth, user.email])
+
+
+
+
 
     const signInWithGoogle = (location, history) => {
         setIsLoading(true);
@@ -75,7 +90,6 @@ const useFirebase = () => {
             })
             .finally(() => setIsLoading(false));
     }
-
 
     const loginUser = (email, password, location, history) => {
         setIsLoading(true);
@@ -101,6 +115,7 @@ const useFirebase = () => {
         setIsLoading(true)
         signOut(auth).then(() => {
             // Sign-out successful.
+            setAdmin(false)
             setUser({});
         }).catch((error) => {
             // An error happened.
@@ -108,7 +123,8 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
-    //Function to add users to database
+
+    //Function to add users to database MONGO DB
     const saveUserToDb = (email, displayName, method) => {
         const user = { email, displayName };
         fetch('http://localhost:5000/users', {
@@ -122,13 +138,15 @@ const useFirebase = () => {
     }
 
 
+
     return {
         user,
+        admin,
         isLoading,
         registerUser,
         loginUser,
         signInWithGoogle,
-        logOut
+        logOut,
     }
 };
 

@@ -13,6 +13,7 @@ import Stores from './components/Stores/Stores';
 import RegisterStore from './components/RegisterStore/RegisterStore';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import StoreDetails from './components/StoreDetails/StoreDetails';
+import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
               <Header></Header>
               <RegisterStore></RegisterStore>
               <Footer></Footer>
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard">
+              <Dashboard></Dashboard>
             </PrivateRoute>
           </Switch>
         </Router>
